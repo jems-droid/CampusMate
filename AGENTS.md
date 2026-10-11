@@ -8,3 +8,7 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Architecture
+- All CampusMate state lives in one React context (src/lib/campus/store.tsx) persisted to localStorage — keeps every page in sync without a backend, as the prototype spec requires.
+- XP and recommendation rules are pure functions in src/lib/campus/{xp,recommend}.ts with tests — so business rules stay testable apart from UI.

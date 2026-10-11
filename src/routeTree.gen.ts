@@ -10,12 +10,20 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ActivitiesRouteImport } from './routes/activities'
 import { Route as DiscoverRouteImport } from './routes/discover'
 import { Route as HomeRouteImport } from './routes/home'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as ReviewRouteImport } from './routes/review'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActivitiesRoute = ActivitiesRouteImport.update({
+  id: '/activities',
+  path: '/activities',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DiscoverRoute = DiscoverRouteImport.update({
@@ -28,35 +36,65 @@ const HomeRoute = HomeRouteImport.update({
   path: '/home',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReviewRoute = ReviewRouteImport.update({
+  id: '/review',
+  path: '/review',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/activities': typeof ActivitiesRoute
   '/discover': typeof DiscoverRoute
   '/home': typeof HomeRoute
+  '/profile': typeof ProfileRoute
+  '/review': typeof ReviewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/activities': typeof ActivitiesRoute
   '/discover': typeof DiscoverRoute
   '/home': typeof HomeRoute
+  '/profile': typeof ProfileRoute
+  '/review': typeof ReviewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/activities': typeof ActivitiesRoute
   '/discover': typeof DiscoverRoute
   '/home': typeof HomeRoute
+  '/profile': typeof ProfileRoute
+  '/review': typeof ReviewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/discover' | '/home'
+  fullPaths:
+    '/' | '/activities' | '/discover' | '/home' | '/profile' | '/review'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/discover' | '/home'
-  id: '__root__' | '/' | '/discover' | '/home'
+  to: '/' | '/activities' | '/discover' | '/home' | '/profile' | '/review'
+  id:
+    | '__root__'
+    | '/'
+    | '/activities'
+    | '/discover'
+    | '/home'
+    | '/profile'
+    | '/review'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActivitiesRoute: typeof ActivitiesRoute
   DiscoverRoute: typeof DiscoverRoute
   HomeRoute: typeof HomeRoute
+  ProfileRoute: typeof ProfileRoute
+  ReviewRoute: typeof ReviewRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -66,6 +104,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/activities': {
+      id: '/activities'
+      path: '/activities'
+      fullPath: '/activities'
+      preLoaderRoute: typeof ActivitiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/discover': {
@@ -82,13 +127,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/review': {
+      id: '/review'
+      path: '/review'
+      fullPath: '/review'
+      preLoaderRoute: typeof ReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActivitiesRoute: ActivitiesRoute,
   DiscoverRoute: DiscoverRoute,
   HomeRoute: HomeRoute,
+  ProfileRoute: ProfileRoute,
+  ReviewRoute: ReviewRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
