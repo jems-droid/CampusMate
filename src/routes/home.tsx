@@ -35,7 +35,7 @@ function HomePage() {
   const xp = rollDay(state.xp, today);
   const recs = useMemo(() => recommend(activities, p.interests, p.personality, 4, state.attended.map((c) => c.id)), [activities, p, state.attended]);
   const [stepIdx, setStepIdx] = useState(0);
-  const step = NEXT_STEPS[stepIdx % NEXT_STEPS.length];
+  const step = NEXT_STEPS[stepIdx % NEXT_STEPS.length]!;
   const upcoming = [...new Set([...state.joined, ...state.saved])]
     .map(getActivity).filter((a) => a && a.type === "event")
     .sort((a, b) => (a!.dayOffset ?? 0) - (b!.dayOffset ?? 0)).slice(0, 4);
