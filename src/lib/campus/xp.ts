@@ -38,7 +38,7 @@ export function awardXp(xp: XpState, amount: number, today: string) {
   return { xp: { ...cur, total: cur.total + granted, today: cur.today + granted }, granted };
 }
 
-export type Completion = { id: string; date: string; score?: number; outOf?: number; xp: number };
+export type Completion = { id: string; date: string; score?: number | undefined; outOf?: number | undefined; xp: number };
 
 export function alreadyRewardedToday(completions: Completion[], id: string, today: string) {
   return completions.some((c) => c.id === id && c.date === today && c.xp > 0);

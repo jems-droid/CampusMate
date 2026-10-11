@@ -22,15 +22,15 @@ export function OrganizeDialog({ open, onOpenChange }: { open: boolean; onOpenCh
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     const er: Record<string, string> = {};
-    if (!f.title.trim()) er.title = "Add a title.";
-    if (!f.category) er.category = "Pick a category.";
-    if (f.description.trim().length < 10) er.description = "Describe it in at least a sentence.";
-    if (!f.organizer.trim()) er.organizer = "Who's organising?";
-    if (!f.date) er.date = "Choose a date."; else if (f.date < localDateKey()) er.date = "Date can't be in the past.";
-    if (!f.time) er.time = "Choose a time.";
-    if (!f.location.trim()) er.location = "Where is it?";
-    const d = Number(f.durationMin); if (!d || d < 10 || d > 600) er.durationMin = "10–600 minutes.";
-    if (!f.interests.length) er.interests = "Pick at least one interest.";
+    if (!f.title.trim()) er["title"] = "Add a title.";
+    if (!f.category) er["category"] = "Pick a category.";
+    if (f.description.trim().length < 10) er["description"] = "Describe it in at least a sentence.";
+    if (!f.organizer.trim()) er["organizer"] = "Who's organising?";
+    if (!f.date) er["date"] = "Choose a date."; else if (f.date < localDateKey()) er["date"] = "Date can't be in the past.";
+    if (!f.time) er["time"] = "Choose a time.";
+    if (!f.location.trim()) er["location"] = "Where is it?";
+    const d = Number(f.durationMin); if (!d || d < 10 || d > 600) er["durationMin"] = "10–600 minutes.";
+    if (!f.interests.length) er["interests"] = "Pick at least one interest.";
     setErr(er);
     if (Object.keys(er).length) return;
     submitEvent({ ...f, category: f.category as CategoryId, durationMin: d, title: f.title.trim(), description: f.description.trim(), organizer: f.organizer.trim(), location: f.location.trim() });

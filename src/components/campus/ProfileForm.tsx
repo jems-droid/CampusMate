@@ -19,12 +19,12 @@ export function ProfileForm({ initial, submitLabel, onSubmit }: { initial?: Prof
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     const er: Record<string, string> = {};
-    if (!p.name?.trim()) er.name = "Please tell us what to call you.";
-    if (!p.roll?.trim()) er.roll = "Roll number is required.";
-    else if (!/^[A-Za-z0-9\-/]{3,20}$/.test(p.roll.trim())) er.roll = "Use 3–20 letters, numbers, - or /.";
-    if (!p.place?.trim()) er.place = "Add your place or locality.";
-    if (!p.personality) er.personality = "Pick the one that feels closest — you can change it later.";
-    if (!p.interests?.length) er.interests = "Choose at least one interest.";
+    if (!p.name?.trim()) er["name"] = "Please tell us what to call you.";
+    if (!p.roll?.trim()) er["roll"] = "Roll number is required.";
+    else if (!/^[A-Za-z0-9\-/]{3,20}$/.test(p.roll.trim())) er["roll"] = "Use 3–20 letters, numbers, - or /.";
+    if (!p.place?.trim()) er["place"] = "Add your place or locality.";
+    if (!p.personality) er["personality"] = "Pick the one that feels closest — you can change it later.";
+    if (!p.interests?.length) er["interests"] = "Choose at least one interest.";
     setErrors(er);
     if (Object.keys(er).length) return;
     onSubmit({ name: p.name!.trim(), roll: p.roll!.trim(), place: p.place!.trim(), personality: p.personality!, interests: p.interests! });
