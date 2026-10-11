@@ -108,7 +108,7 @@ function QuizRunner({ a, claimed }: { a: Activity; claimed: boolean }) {
     </div>
   );
 
-  const score = answers.filter((x, i) => x === qs[i].answer).length;
+  const score = answers.filter((x, i) => x === qs[i]?.answer).length;
   const allAnswered = answers.every((x) => x !== null);
 
   return (
